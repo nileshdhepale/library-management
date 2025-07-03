@@ -1,0 +1,60 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #e3f2fd,
+    #ffffff
+  ); /* soft gradient background */
+  font-family: "Roboto", sans-serif;
+}
+
+.login-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 28px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 26px;
+  color: #3f51b5;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.login-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.register-link button {
+  margin-left: 6px;
+  font-weight: 500;
+}

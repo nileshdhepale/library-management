@@ -1,0 +1,17 @@
+<div class="borrowed-wrapper" *ngIf="borrowedBooks.length > 0; else noBorrowed">
+  <mat-card class="book-card" *ngFor="let book of borrowedBooks">
+    <div class="book-details">
+      <h3 class="book-title">{{ book.title }}</h3>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Borrowed On:</strong> {{ book.date | date: 'mediumDate' }}</p>
+    </div>
+
+    <div class="return-btn">
+      <button mat-raised-button color="warn" (click)="returnBook(book)">Return Book</button>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #noBorrowed>
+  <p class="no-data">📚 No books borrowed yet.</p>
+</ng-template>

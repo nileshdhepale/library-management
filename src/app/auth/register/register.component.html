@@ -1,0 +1,40 @@
+<div class="register-page-wrapper">
+  <mat-card class="register-card">
+    <h2 class="register-title">Create an Account ✨</h2>
+    <p class="register-subtitle">Join the library system</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text" placeholder="Enter your name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Enter your email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter your password" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="user">User</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="registerForm.invalid">
+        Register
+      </button>
+
+      <div class="login-link">
+        <span>Already have an account?</span>
+        <button mat-button color="accent" [routerLink]="['/login']">Login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,44 @@
+.user-home-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.user-home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #3f51b5;
+  margin-bottom: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.logout-btn {
+  font-weight: 500;
+  border-radius: 6px;
+  height: 36px;
+}
+
+.home-divider {
+  margin: 16px 0;
+}
+
+.section-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #444;
+}

@@ -1,0 +1,41 @@
+<h2 class="page-title">All Users & Their Borrowed Books</h2>
+
+<mat-card class="user-card" *ngFor="let user of users">
+  <div class="user-header">
+    <h3>{{ user.name }}</h3>
+    <span class="role-chip">{{ user.role }}</span>
+  </div>
+
+  <p><strong>Email:</strong> {{ user.email }}</p>
+
+  <!-- Borrowed Books -->
+  <div *ngIf="user.borrowed.length > 0">
+    <h4 class="borrow-title">Borrowed Books</h4>
+    <ul class="book-list">
+      <li *ngFor="let book of user.borrowed">
+        📖 {{ book.title }}
+        <span class="borrow-date"
+          >Borrowed on: {{ book.date | date : "shortDate" }}</span
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- Returned Books -->
+  <div *ngIf="user.returned.length > 0">
+    <h4 class="borrow-title">Returned Books</h4>
+    <ul class="book-list">
+      <li *ngFor="let book of user.returned">
+        📘 {{ book.title }}
+        <span class="borrow-date"
+          >Returned on: {{ book.returnedOn | date : "shortDate" }}</span
+        >
+      </li>
+    </ul>
+  </div>
+
+  <!-- If no borrowed and returned -->
+  <div *ngIf="user.borrowed.length === 0 && user.returned.length === 0">
+    <p class="no-books"><em>No book transactions.</em></p>
+  </div>
+</mat-card>

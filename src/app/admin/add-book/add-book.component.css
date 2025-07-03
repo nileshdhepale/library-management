@@ -1,0 +1,53 @@
+/* Page background and centering */
+.page-container {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  /* padding: 40px 16px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card styling */
+.add-book-card {
+  width: 100%;
+  max-width: 550px;
+  padding: 32px 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Heading */
+.form-title {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #3f51b5;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.full-width {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #3f51b5;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+.btn-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.submit-btn:hover {
+  background-color: #303f9f;
+}

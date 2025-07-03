@@ -1,0 +1,27 @@
+<div class="login-page-wrapper">
+  <mat-card class="login-card">
+    <h2 class="login-title">Welcome Back 👋</h2>
+    <p class="login-subtitle">Please login to continue</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="full-width">
+        Login
+      </button>
+
+      <div class="register-link">
+        <span>Don't have an account?</span>
+        <button mat-button color="accent" [routerLink]="['/register']">Register</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

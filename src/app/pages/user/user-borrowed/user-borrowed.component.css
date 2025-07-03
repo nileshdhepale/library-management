@@ -1,0 +1,41 @@
+.borrowed-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 30px;
+}
+
+.book-card {
+  width: 320px;
+  padding: 24px;
+  background-color: #ffffff; 
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+.book-title {
+  color: #3f51b5;
+  margin-bottom: 12px;
+}
+
+.return-btn {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 40px;
+  font-size: 18px;
+}

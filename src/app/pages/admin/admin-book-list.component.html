@@ -1,0 +1,23 @@
+<div class="admin-book-list-container">
+  <h2 class="page-title">📚 Books Added</h2>
+
+  <div *ngIf="books.length === 0" class="no-books">No books found.</div>
+
+  <mat-card class="book-card" *ngFor="let book of books; let i = index">
+    <h3>{{ book.title }}</h3>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Published:</strong> {{ book.publishedDate }}</p>
+    <p><strong>Quantity:</strong> {{ book.quantity }}</p>
+
+    <div class="actions">
+      <button mat-stroked-button color="primary" (click)="editBook(i)">
+        <mat-icon>edit</mat-icon> Edit
+      </button>
+
+      <button mat-stroked-button color="warn" (click)="deleteBook(i)">
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+    </div>
+  </mat-card>
+</div>

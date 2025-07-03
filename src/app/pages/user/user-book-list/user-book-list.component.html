@@ -1,0 +1,15 @@
+<div class="book-list-wrapper">
+  <mat-card class="book-card" *ngFor="let book of books">
+    <div class="book-details">
+      <h3 class="book-title">{{ book.title }}</h3>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Available:</strong> {{ book.quantity }}</p>
+    </div>
+
+    <div class="action-btn">
+      <button mat-raised-button color="accent" (click)="borrowBook(book)" [disabled]="book.quantity === 0">
+        Borrow
+      </button>
+    </div>
+  </mat-card>
+</div>

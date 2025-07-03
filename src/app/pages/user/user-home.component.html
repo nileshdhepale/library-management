@@ -1,0 +1,30 @@
+<mat-card class="user-home-container">
+  <div class="user-home-header">
+    <h2 class="welcome-title">Welcome, {{ currentUser?.name }}</h2>
+
+    <div class="action-buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        [routerLink]="['/user/borrowed']"
+      >
+        View Borrowed Books
+      </button>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="logout()"
+        class="logout-btn"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <mat-divider class="home-divider"></mat-divider>
+
+  <div class="available-books-section">
+    <h3 class="section-title">Available Books</h3>
+    <app-user-book-list></app-user-book-list>
+  </div>
+</mat-card>
