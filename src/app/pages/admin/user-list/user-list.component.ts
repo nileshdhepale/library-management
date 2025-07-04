@@ -13,18 +13,6 @@ import { MatCardModule } from '@angular/material/card';
 export class UserListComponent implements OnInit {
   users: any[] = [];
 
-  // ngOnInit(): void {
-  //   const allUsers = JSON.parse(localStorage.getItem('users') || '[]');
-
-  //   this.users = allUsers
-  //     .filter((user: any) => user.role === 'user')
-  //     .map((user: any) => {
-  //       const borrowed = JSON.parse(
-  //         localStorage.getItem(`borrowed_${user.email}`) || '[]'
-  //       );
-  //       return { ...user, borrowed };
-  //     });
-  // }
 
   ngOnInit(): void {
   const allUsers = JSON.parse(localStorage.getItem('users') || '[]');
