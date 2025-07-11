@@ -7,21 +7,21 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  register(user: any) {
-    const existing = JSON.parse(localStorage.getItem('users') || '[]');
-    existing.push(user);
-    localStorage.setItem('users', JSON.stringify(existing));
-  }
+  // register(user: any) {
+  //   const existing = JSON.parse(localStorage.getItem('users') || '[]');
+  //   existing.push(user);
+  //   localStorage.setItem('users', JSON.stringify(existing));
+  // }
 
-  login(email: string, password: string): any {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find((u: any) => u.email === email && u.password === password);
-    if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return user;
-    }
-    return null;
-  }
+  // login(email: string, password: string): any {
+  //   const users = JSON.parse(localStorage.getItem('users') || '[]');
+  //   const user = users.find((u: any) => u.email === email && u.password === password);
+  //   if (user) {
+  //     localStorage.setItem('currentUser', JSON.stringify(user));
+  //     return user;
+  //   }
+  //   return null;
+  // }
 
   logout() {
     localStorage.removeItem('currentUser');

@@ -40,28 +40,7 @@ export class BookService {
     const userBorrowKey = `borrowed_${email}`;
     return JSON.parse(localStorage.getItem(userBorrowKey) || '[]');
   }
-
-  // returnBook(book: any, email: string) {
-  //   // Update quantity in books
-  //   const books = this.getBooks();
-  //   const index = books.findIndex((b: { title: string }) => b.title === book.title);
-  //   if (index !== -1) {
-  //     books[index].quantity++;
-  //     localStorage.setItem(this.booksKey, JSON.stringify(books));
-  //   }
-
-  //   // Remove one matching entry from user's borrowed list
-  //   const userBorrowKey = `borrowed_${email}`;
-  //   const borrowed = JSON.parse(localStorage.getItem(userBorrowKey) || '[]');
-
-  //   const removeIndex = borrowed.findIndex((b: any) => b.title === book.title);
-  //   if (removeIndex !== -1) {
-  //     borrowed.splice(removeIndex, 1);
-  //   }
-
-  //   localStorage.setItem(userBorrowKey, JSON.stringify(borrowed));
-  // }
-
+ 
   returnBook(book: any, email: string) {
   // Update quantity in books
   const books = this.getBooks();
