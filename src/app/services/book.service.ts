@@ -1,17 +1,31 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
   private booksKey = 'books';
+  private apiUrl = environment.baseUrl;
 
-  addBook(book: any) {
-    const books = JSON.parse(localStorage.getItem(this.booksKey) || '[]');
-    books.push(book);
-    localStorage.setItem(this.booksKey, JSON.stringify(books));
+  constructor(private http: HttpClient) {} // ✅ Inject HttpClient
+
+  addBook(bookData: any) {
+    console.log('📡 Sending to:', `${this.apiUrl}/books`);
+    return this.http.post(`${this.apiUrl}/books`, bookData);
   }
 
-  getBooks() {
-    return JSON.parse(localStorage.getItem(this.booksKey) || '[]');
+
+  getBooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/books`);
+  }
+
+  updateBook(bookId: string, updatedData: any) {
+    return this.http.put(`${this.apiUrl}/books/${bookId}`, updatedData);
+  }
+
+  deleteBook(bookId: string) {
+    return this.http.delete(`${this.apiUrl}/books/${bookId}`);
   }
 
   clearBooks() {
@@ -22,51 +36,22 @@ export class BookService {
     localStorage.setItem(this.booksKey, JSON.stringify(updatedBooks));
   }
 
-  borrowBook(book: any, email: string) {
-    const books = this.getBooks();
-    const index = books.findIndex((b: { title: string }) => b.title === book.title);
-    if (index !== -1 && books[index].quantity > 0) {
-      books[index].quantity--;
-      localStorage.setItem(this.booksKey, JSON.stringify(books));
-
-      const userBorrowKey = `borrowed_${email}`;
-      const borrowed = JSON.parse(localStorage.getItem(userBorrowKey) || '[]');
-      borrowed.push({ ...book, date: new Date() });
-      localStorage.setItem(userBorrowKey, JSON.stringify(borrowed));
-    }
+  borrowBook(bookId: string, userId: string) {
+    return this.http.post(`${this.apiUrl}/borrow`, {
+      bookId,
+      userId,
+    });
   }
 
-  getBorrowedBooks(email: string) {
-    const userBorrowKey = `borrowed_${email}`;
-    return JSON.parse(localStorage.getItem(userBorrowKey) || '[]');
+  getBorrowedBooks(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/borrow/${userId}`);
   }
- 
-  returnBook(book: any, email: string) {
-  // Update quantity in books
-  const books = this.getBooks();
-  const index = books.findIndex((b: { title: string }) => b.title === book.title);
-  if (index !== -1) {
-    books[index].quantity++;
-    localStorage.setItem(this.booksKey, JSON.stringify(books));
+  returnBook(borrowId: string) {
+    return this.http.post(`${this.apiUrl}/borrow/return/${borrowId}`, {});
   }
 
-  // Remove one matching entry from user's borrowed list
-  const userBorrowKey = `borrowed_${email}`;
-  const borrowed = JSON.parse(localStorage.getItem(userBorrowKey) || '[]');
-
-  const removeIndex = borrowed.findIndex((b: any) => b.title === book.title);
-  if (removeIndex !== -1) {
-    const returnedBook = borrowed[removeIndex];
-    returnedBook.returnedOn = new Date(); // Add return date
-    borrowed.splice(removeIndex, 1);
-    localStorage.setItem(userBorrowKey, JSON.stringify(borrowed));
-
-    // Add to returned books
-    const returnKey = `returned_${email}`;
-    const returned = JSON.parse(localStorage.getItem(returnKey) || '[]');
-    returned.push(returnedBook);
-    localStorage.setItem(returnKey, JSON.stringify(returned));
+   getAllUsersWithBorrows(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/users/with-borrows`);
   }
-}
 
 }

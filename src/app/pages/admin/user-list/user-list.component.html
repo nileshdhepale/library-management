@@ -12,9 +12,9 @@
     <h4 class="borrow-title">Borrowed Books</h4>
     <ul class="book-list">
       <li *ngFor="let book of user.borrowed">
-        📖 {{ book.title }}
+        📖 {{ book.bookId.title }}
         <span class="borrow-date"
-          >Borrowed on: {{ book.date | date : "shortDate" }}</span
+          >Borrowed on: {{ book.borrowedAt | date : "shortDate" }}</span
         >
       </li>
     </ul>
@@ -24,9 +24,9 @@
     <h4 class="borrow-title">Returned Books</h4>
     <ul class="book-list">
       <li *ngFor="let book of user.returned">
-        📘 {{ book.title }}
+        📘 {{ book.bookId.title }}
         <span class="borrow-date"
-          >Returned on: {{ book.returnedOn | date : "shortDate" }}</span
+          >Returned on: {{ book.returnedAt | date : "shortDate" }}</span
         >
       </li>
     </ul>

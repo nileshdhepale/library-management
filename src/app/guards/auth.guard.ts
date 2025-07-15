@@ -6,6 +6,8 @@ export const authGuard: CanActivateFn = () => {
 
   if (typeof window !== 'undefined') {
     const currentUser = localStorage.getItem('currentUser');
+
+    console.log('currentUser', currentUser);
     if (currentUser) {
       return true;
     } else {

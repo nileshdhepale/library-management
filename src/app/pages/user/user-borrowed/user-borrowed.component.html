@@ -1,9 +1,9 @@
 <div class="borrowed-wrapper" *ngIf="borrowedBooks.length > 0; else noBorrowed">
   <mat-card class="book-card" *ngFor="let book of borrowedBooks">
     <div class="book-details">
-      <h3 class="book-title">{{ book.title }}</h3>
-      <p><strong>Author:</strong> {{ book.author }}</p>
-      <p><strong>Borrowed On:</strong> {{ book.date | date: 'mediumDate' }}</p>
+      <h3 class="book-title">{{ book.bookId.title }}</h3>
+      <p><strong>Author:</strong> {{ book.bookId.author }}</p>
+      <p><strong>Borrowed On:</strong> {{ book.borrowedAt | date: 'mediumDate' }}</p>
     </div>
 
     <div class="return-btn">

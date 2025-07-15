@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthService } from '../auth.service'; // ✅ Adjust path as needed
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,11 @@ import { MatSelectModule } from '@angular/material/select';
 export class RegisterComponent {
   registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -43,20 +48,38 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const formData = this.registerForm.value;
-
-    const emailExists = users.some(
-      (user: any) => user.email === formData.email
-    );
-    if (emailExists) {
-      alert('A user with this email already exists.');
-      return;
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (res) => {
+          alert('Registered successfully');
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          if (err.error.message === 'Email already exists') {
+            alert(
+              'This email is already registered. Please use a different one.'
+            );
+          } else {
+            alert('Registration failed');
+          }
+        },
+      });
     }
 
-    users.push(formData);
-    localStorage.setItem('users', JSON.stringify(users));
-    alert('Registered successfully!');
-    this.router.navigate(['/login']);
+    // const users = JSON.parse(localStorage.getItem('users') || '[]');
+    // const formData = this.registerForm.value;
+
+    // const emailExists = users.some(
+    //   (user: any) => user.email === formData.email
+    // );
+    // if (emailExists) {
+    //   alert('A user with this email already exists.');
+    //   return;
+    // }
+
+    // users.push(formData);
+    // localStorage.setItem('users', JSON.stringify(users));
+    // alert('Registered successfully!');
+    // this.router.navigate(['/login']);
   }
 }

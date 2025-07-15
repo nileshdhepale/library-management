@@ -1,27 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private users: any[] = [];
+  // private baseUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = environment.baseUrl;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
-  // register(user: any) {
-  //   const existing = JSON.parse(localStorage.getItem('users') || '[]');
-  //   existing.push(user);
-  //   localStorage.setItem('users', JSON.stringify(existing));
-  // }
+  register(data: any) {
+    return this.http.post(`${this.apiUrl}/auth/register`, data);
+  }
 
-  // login(email: string, password: string): any {
-  //   const users = JSON.parse(localStorage.getItem('users') || '[]');
-  //   const user = users.find((u: any) => u.email === email && u.password === password);
-  //   if (user) {
-  //     localStorage.setItem('currentUser', JSON.stringify(user));
-  //     return user;
-  //   }
-  //   return null;
-  // }
+  login(data: any) {
+    return this.http.post(`${this.apiUrl}/auth/login`, data);
+  }
 
   logout() {
     localStorage.removeItem('currentUser');
@@ -30,6 +25,10 @@ export class AuthService {
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser') || 'null');
+  }
+
+  updateProfile(userId: string, userData: any) {
+    return this.http.put<any>(`${this.apiUrl}/auth/update/${userId}`, userData);
   }
 
   isLoggedIn(): boolean {

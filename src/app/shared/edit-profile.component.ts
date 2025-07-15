@@ -44,21 +44,38 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const index = users.findIndex(
-      (u: any) => u.email === this.currentUser.email
-    );
+  // onSubmit() {
+  //   const users = JSON.parse(localStorage.getItem('users') || '[]');
+  //   const index = users.findIndex(
+  //     (u: any) => u.email === this.currentUser.email
+  //   );
 
-    if (index !== -1) {
-      users[index] = {
-        ...users[index],
-        ...this.profileForm.value,
-      };
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('currentUser', JSON.stringify(users[index]));
-      alert('Profile updated successfully!');
-      this.router.navigate(['/']); // redirect based on role if needed
-    }
-  }
+  //   if (index !== -1) {
+  //     users[index] = {
+  //       ...users[index],
+  //       ...this.profileForm.value,
+  //     };
+  //     localStorage.setItem('users', JSON.stringify(users));
+  //     localStorage.setItem('currentUser', JSON.stringify(users[index]));
+  //     alert('Profile updated successfully!');
+  //     this.router.navigate(['/']); // redirect based on role if needed
+  //   }
+  // }
+
+  onSubmit() {
+  this.authService
+    .updateProfile(this.currentUser.id, this.profileForm.value)
+    .subscribe({
+      next: (res) => {
+        localStorage.setItem('currentUser', JSON.stringify(res.user));
+        alert('Profile updated successfully!');
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Failed to update profile!');
+      },
+    });
+}
+
 }
